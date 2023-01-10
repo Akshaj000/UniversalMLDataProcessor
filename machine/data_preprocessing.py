@@ -9,8 +9,17 @@ class DataPreprocessing:
         self.features = list(data.columns)
         self.output_name = None
         self.train_features,self.train_target,self.test_target,self.test_features = None,None,None,None
-    def drop_null(self):
-        self.data.dropna(axis=0,inplace=True)
+    def drop_columns(self,columns):
+        self.data.drop(columns,axis=1,inplace=True)
+        if type(columns) == list:
+            self.features = [i for i in self.features if i not in columns]
+        else:
+            self.features.remove(columns)
+    def handle_null(self,type='drop'):
+        if type=='drop':
+            self.data.dropna(axis=0,inplace=True)
+        if type=="mean":
+            self.data=self.data.apply(lambda x:x.fillna(x.mean()))
     def initialize():
         from sklearn import preprocessing,model_selection,decomposition
         return {
