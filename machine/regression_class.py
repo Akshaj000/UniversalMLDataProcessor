@@ -1,5 +1,8 @@
 class MachineLearningRegression:
-    def __init__(self,data_pr,models=None):
+    def __init__(self,data_pr,prediction_array=None,k_fold_num=None,models=None):
+        self.best_r2_score = 0
+        self.best_model = None
+        self.prediction_array=prediction_array
         self.data = data_pr.data
         self.train_features = data_pr.train_features
         self.train_target = data_pr.train_target
@@ -23,9 +26,20 @@ class MachineLearningRegression:
         for model,dic in self.model_evaluvation_dict.items():
             for metric,obj in metrics.items():
                 self.model_evaluvation_dict[model][metric] = obj(self.model_prediction[model],self.test_target)
+                if self.model_evaluvation_dict[model]['r2 score']>self.best_r2_score:
+                    self.best_model = {'Name':model,
+                                       'r2 score':self.model_evaluvation_dict[model]['r2 score'],
+                                        'model_obj':self.model_evaluvation_dict[model]['model_object']}
+                    self.best_r2_score = self.model_evaluvation_dict[model]['r2 score']
     def evaluvate(self):
+        import numpy as np
         self.fit()
         self.Score_test_dataset()
+        if type(self.prediction_array)==np.ndarray:
+            self.model_evaluvation_dict['prediction']=self.best_model['model_obj'].predict(np.array([self.prediction_array]))[0]
         for model in self.model_evaluvation_dict:
-            del self.model_evaluvation_dict[model]['model_object']
+            if model!='prediction':
+                del self.model_evaluvation_dict[model]['model_object']
+        del self.best_model['model_obj']
+        self.model_evaluvation_dict['best model'] = self.best_model
         return self.model_evaluvation_dict
