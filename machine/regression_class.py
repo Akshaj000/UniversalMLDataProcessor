@@ -2,6 +2,7 @@ class MachineLearningRegression:
     def __init__(self,data_pr,prediction_array=None,k_fold_num=None,models=None):
         self.best_r2_score = 0
         self.best_model = None
+        self.best_model_object = None
         self.prediction_array=prediction_array
         self.data = data_pr.data
         self.train_features = data_pr.train_features
@@ -40,6 +41,7 @@ class MachineLearningRegression:
         for model in self.model_evaluvation_dict:
             if model!='prediction':
                 del self.model_evaluvation_dict[model]['model_object']
+        self.best_model_object = self.best_model['model_obj']
         del self.best_model['model_obj']
         self.model_evaluvation_dict['best model'] = self.best_model
         return self.model_evaluvation_dict
