@@ -9,9 +9,13 @@ class TypeEnum(enum.Enum):
     REGRESSION = "Regression"
     CLASSIFICATION = "Classification"
 
+class FillNullEnum(enum.Enum):
+    MEAN = "mean"
+    DROP = "drop"
+
 def preprocessor(
     target: str,
-    can_drop_null: bool,
+    fill_null: FillNullEnum,
     split_percent: float,
     can_apply_smote: bool,
     scaler: ScalerEnum,
@@ -22,9 +26,11 @@ def preprocessor(
     if 'Unnamed: 32' in data.columns:
         data.drop(columns=['Unnamed: 32'], inplace=True)
     data_pre_object = DataPreprocessing(data)
-    if can_drop_null:
-        data_pre_object.drop_null()
     data_pre_object.encode_categorical_columns()
+    if fill_null.value == "mean":
+        data_pre_object.fill_null("mean")
+    else:
+        data_pre_object.drop_null()
     data_pre_object.out_in(target)
     data_pre_object.split(split_percent)
     if can_apply_smote:
