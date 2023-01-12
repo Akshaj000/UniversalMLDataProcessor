@@ -1,7 +1,6 @@
 from flask import request
 from api import app
-import csv
-import os
+import json
 
 @app.route('/health', methods = ['POST', 'GET'])
 def health():
@@ -18,7 +17,7 @@ def health():
     return d
 
 @app.route('/upload', methods = ['POST'])  
-def upload():  
+def upload(): 
     if request.method == 'POST': 
         try:
             f = request.files['file']
@@ -35,9 +34,11 @@ def upload():
             "errors": "Can only except post method."
         }
 
-@app.route('/process', methods = ['POST', 'GET'])
+@app.route('/process', methods = ['GET', 'POST'])
 def process():
-    data = request.get_json()
+    data =  request.data.decode("utf-8")
+    data = json.loads(data)
+    print(data)
     try:
         import pandas as pd
         data_pre_object = pd.read_csv("uploads/data.csv")
@@ -45,15 +46,17 @@ def process():
         data_pre_object = preprocessor(
             target = data['target'],
             fill_null = data['fill_null'],
-            split_percent = data['split_percent'],
+            split_percent = float(data['split_percent']),
             can_apply_smote= data['can_apply_smote'],
             scaler = data['scaler'],
             data=data_pre_object
         )
+        print("data_pre_object")
         fit = fit(
             data_pre_object = data_pre_object,
             type = data['type']
         )
+        print(fit)
         return fit
     except Exception as e:
         return {

@@ -36,19 +36,9 @@
             <div class="ui segment">
               <div class="ui center aligned header">UPLOAD A DATASET</div>
               <hr />
-              <form
-                action="http://localhost:5000/upload"
-                method="POST"
-                enctype="multipart/form-data"
-              >
                 <div class="ui container center aligned">
-                  <input name="file" type="file" placeholder="Upload Image" />
+                  <input name="file" type="file" placeholder="Upload" id="upload_dataset" onchange="upload(event)"/>
                 </div>
-                <!-- upload button -->
-                <div class="ui center aligned container upload">
-                  <input type="submit" class="ui primary button" />
-                </div>
-              </form>
             </div>
             <!-- question box -->
             <div class="ui container">
@@ -63,7 +53,7 @@
                       value="Regression"
                       checked="checked"
                     />
-                    <label>Regeression</label>
+                    <label>Regression</label>
                   </div>
                   <div class="field">
                     <div class="ui radio checkbox">
@@ -100,12 +90,13 @@
                             type="radio"
                             name="question2"
                             checked="checked"
+                            value="drop"
                           />
                           <label>Drop null values</label>
                         </div>
                         <div class="field">
                           <div class="ui radio checkbox">
-                            <input type="radio" name="question2" />
+                            <input type="radio" name="question2" value="mean"/>
                             <label>Replace with mean values</label>
                           </div>
                         </div>
@@ -118,7 +109,7 @@
                     <div class="ui container">
                       <h3>How much should be the split percentile :</h3>
                       <div class="ui input">
-                        <input type="text" name="splitPer" />
+                        <input type="number" name="splitPer"  />
                       </div>
                     </div>
                     <br />
@@ -133,6 +124,7 @@
                             type="radio"
                             name="question3"
                             checked="checked"
+                            value=true  
                           />
                           <label>Yes</label>
                         </div>
@@ -156,12 +148,13 @@
                             type="radio"
                             name="question4"
                             checked="checked"
+                            value="Standard"
                           />
                           <label>Standardization</label>
                         </div>
                         <div class="field">
                           <div class="ui radio checkbox">
-                            <input type="radio" name="question4" />
+                            <input type="radio" name="question4" value="Normalize"/>
                             <label>Normalisation</label>
                           </div>
                         </div>
@@ -221,5 +214,6 @@
       </div>
     </div>
   </body>
-  <script src="./index.js"></script>
+  <script src="./js/process.js"></script>
+  <script src="./js/upload.js"></script>
 </html>

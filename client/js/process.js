@@ -22,12 +22,20 @@ document.getElementById("start").addEventListener("click", () => {
 
   //to send to the server
   var data = {
-    target: typeChosen,
+    target: target,
+    type: typeChosen,
     fill_null: nullValues,
     split_percent: splitPer,
-    can_apply_smote: SmoteChosen,
+    can_apply_smote: SmoteChosen == "true" ? true : false,
     scaler: ScalerChosen,
   };
-
-  //get request
+  process(data);
+  
 });
+
+const process = async(data)=>{
+  await fetch("http://localhost:5000/process", {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+}
