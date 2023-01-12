@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+      integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <title>UI</title>
+  </head>
+  <body>
+    <div class="ui secondary pointing menu">
+      <div class="active item">ML UI</div>
+      <div class="item right"><i class="fas fa-brain"></i></div>
+    </div>
+    <!-- body -->
+    <div class="content">
+      <!-- main content wrapper -->
+      <div class="ui two column stackable grid">
+        <div class="column viewport">
+          <div class="ui segment">
+            <!-- upload box -->
+            <div class="ui segment">
+              <div class="ui center aligned header">UPLOAD A DATASET</div>
+              <hr />
+              <form
+                action="http://localhost:5000/upload"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                <div class="ui container center aligned">
+                  <input name="file" type="file" placeholder="Upload Image" />
+                </div>
+                <!-- upload button -->
+                <div class="ui center aligned container upload">
+                  <input type="submit" class="ui primary button" />
+                </div>
+              </form>
+            </div>
+            <!-- question box -->
+            <div class="ui container">
+              <!-- regression or classification -->
+              <div class="ui container">
+                <h3>What do you want to do?</h3>
+                <form id="typeChoose">
+                  <div class="ui radio checkbox">
+                    <input
+                      type="radio"
+                      name="question1"
+                      value="Regression"
+                      checked="checked"
+                    />
+                    <label>Regeression</label>
+                  </div>
+                  <div class="field">
+                    <div class="ui radio checkbox">
+                      <input
+                        type="radio"
+                        name="question1"
+                        value="Classification"
+                      />
+                      <label>Classification</label>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <br />
+              <div class="row">
+                <div class="ui two column stackable grid">
+                  <div class="column">
+                    <!-- choosing target -->
+                    <div class="ui container">
+                      <h3>Choose the target feature :</h3>
+                      <div class="ui input">
+                        <input type="text" name="target" />
+                      </div>
+                    </div>
+                    <br />
+                  </div>
+                  <div class="column">
+                    <!-- can_drop_null_value -->
+                    <div class="ui container">
+                      <h3>How to want to handle null values?</h3>
+                      <form id="nullValues">
+                        <div class="ui radio checkbox">
+                          <input
+                            type="radio"
+                            name="question2"
+                            checked="checked"
+                          />
+                          <label>Drop null values</label>
+                        </div>
+                        <div class="field">
+                          <div class="ui radio checkbox">
+                            <input type="radio" name="question2" />
+                            <label>Replace with mean values</label>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <br />
+                  </div>
+                  <div class="column">
+                    <!-- split_percent -->
+                    <div class="ui container">
+                      <h3>How much should be the split percentile :</h3>
+                      <div class="ui input">
+                        <input type="text" name="splitPer" />
+                      </div>
+                    </div>
+                    <br />
+                  </div>
+                  <div class="column">
+                    <!-- can_apply_smote -->
+                    <div class="ui container">
+                      <h3>Do you want to apply smote to your data?</h3>
+                      <form id="Smote">
+                        <div class="ui radio checkbox">
+                          <input
+                            type="radio"
+                            name="question3"
+                            checked="checked"
+                          />
+                          <label>Yes</label>
+                        </div>
+                        <div class="field">
+                          <div class="ui radio checkbox">
+                            <input type="radio" name="question3" />
+                            <label>No</label>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <br />
+                  </div>
+                  <div class="column">
+                    <!-- can_apply_smote -->
+                    <div class="ui container">
+                      <h3>How do you want to scale the data?</h3>
+                      <form id="scaleChoose">
+                        <div class="ui radio checkbox">
+                          <input
+                            type="radio"
+                            name="question4"
+                            checked="checked"
+                          />
+                          <label>Standardization</label>
+                        </div>
+                        <div class="field">
+                          <div class="ui radio checkbox">
+                            <input type="radio" name="question4" />
+                            <label>Normalisation</label>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <br />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <!-- start button -->
+            <div class="ui center aligned container upload">
+              <div class="ui primary button" id="start">Start</div>
+            </div>
+          </div>
+        </div>
+        <!-- side bar wrapper starts here -->
+        <div class="column contributors">
+          <div class="ui segment">
+            <div class="ui center aligned header">GROUP 5</div>
+            <hr />
+            <div class="ui list in-center">
+              <div class="item">
+                Aashray Katiyar
+                <div class="ui right floated">
+                  <i class="fas fa-coffee"></i>
+                </div>
+              </div>
+              <div class="item">
+                Tejo Vardhan
+                <div class="ui right floated">
+                  <i class="fas fa-laptop"></i>
+                </div>
+              </div>
+              <div class="item">
+                Akshaj SR
+                <div class="ui right floated">
+                  <i class="fas fa-arrow-up"></i>
+                </div>
+              </div>
+              <div class="item">
+                Hari Sankar
+                <div class="ui right floated">
+                  <i class="fas fa-glasses"></i>
+                </div>
+              </div>
+              <div class="item">
+                Abhinav Pandey
+                <div class="ui right floated">
+                  <i class="fas fa-book"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./index.js"></script>
+</html>
