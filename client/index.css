@@ -1,0 +1,21 @@
+.body {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.viewport {
+  width: 80% !important;
+}
+
+.contributors {
+  width: 20% !important;
+}
+
+.content {
+  width: 96% !important;
+  margin: 2% !important;
+}
+
+.upload {
+  margin-top: 2% !important;
+}
