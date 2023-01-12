@@ -1,12 +1,28 @@
 from flask import request
 from api import app
+import csv
+import os
 
-@app.route('/upload', methods = ['POST', 'GET'])  
+@app.route('/health', methods = ['POST', 'GET'])
+def health():
+    d = {
+        "isHealthy" : False,
+        "errors" : None
+    }
+    try:
+        file = open("uploads/data.csv", "rb")
+    except FileNotFoundError:
+        d["errors"] = "File not found. Please upload the file."
+        return d
+    d["isHealthy"] = True
+    return d
+
+@app.route('/upload', methods = ['POST'])  
 def upload():  
     if request.method == 'POST': 
         try:
             f = request.files['file']
-            f.save(f"uploads/data.csv")
+            f.save("uploads/data.csv")
             return {"success": True}
         except Exception as e:
             return {
