@@ -27,8 +27,8 @@ def preprocessor(
         data.drop(columns=['Unnamed: 32'], inplace=True)
     data_pre_object = DataPreprocessing(data)
     data_pre_object.encode_categorical_columns()
-    if fill_null.value == "mean":
-        data_pre_object.fill_null("mean")
+    if fill_null == "mean":
+        data_pre_object.handle_null("mean")
     else:
         data_pre_object.drop_null()
     data_pre_object.out_in(target)

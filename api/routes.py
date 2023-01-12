@@ -17,7 +17,7 @@ def process():
     from machine import preprocessor, fit
     data_pre_object = preprocessor(
         target = data['target'],
-        can_drop_null = data['can_drop_null'],
+        fill_null = data['fill_null'],
         split_percent = data['split_percent'],
         can_apply_smote= data['can_apply_smote'],
         scaler = data['scaler'],
