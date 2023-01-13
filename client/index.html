@@ -36,9 +36,15 @@
             <div class="ui segment">
               <div class="ui center aligned header">UPLOAD A DATASET</div>
               <hr />
-                <div class="ui container center aligned">
-                  <input name="file" type="file" placeholder="Upload" id="upload_dataset" onchange="upload(event)"/>
-                </div>
+              <div class="ui container center aligned">
+                <input
+                  name="file"
+                  type="file"
+                  placeholder="Upload"
+                  id="upload_dataset"
+                  onchange="upload(event)"
+                />
+              </div>
             </div>
             <!-- question box -->
             <div class="ui container">
@@ -96,7 +102,7 @@
                         </div>
                         <div class="field">
                           <div class="ui radio checkbox">
-                            <input type="radio" name="question2" value="mean"/>
+                            <input type="radio" name="question2" value="mean" />
                             <label>Replace with mean values</label>
                           </div>
                         </div>
@@ -109,7 +115,7 @@
                     <div class="ui container">
                       <h3>How much should be the split percentile :</h3>
                       <div class="ui input">
-                        <input type="number" name="splitPer"  />
+                        <input type="number" name="splitPer" />
                       </div>
                     </div>
                     <br />
@@ -124,7 +130,7 @@
                             type="radio"
                             name="question3"
                             checked="checked"
-                            value=true  
+                            value="true"
                           />
                           <label>Yes</label>
                         </div>
@@ -154,7 +160,11 @@
                         </div>
                         <div class="field">
                           <div class="ui radio checkbox">
-                            <input type="radio" name="question4" value="Normalize"/>
+                            <input
+                              type="radio"
+                              name="question4"
+                              value="Normalize"
+                            />
                             <label>Normalisation</label>
                           </div>
                         </div>
@@ -212,8 +222,15 @@
           </div>
         </div>
       </div>
+      <div class="ui segment">
+        <canvas id="MAE"></canvas>
+        <canvas id="MAPE"></canvas>
+        <canvas id="MSE"></canvas>
+        <canvas id="R2Score"></canvas>
+      </div>
     </div>
   </body>
   <script src="./js/process.js"></script>
   <script src="./js/upload.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 </html>
