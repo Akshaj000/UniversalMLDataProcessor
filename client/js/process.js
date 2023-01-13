@@ -180,7 +180,6 @@ const r2score = (responseData) => {
   var r2Scores = labels.map(function (label) {
     return responseData[label]["r2 score"];
   });
-  console.log(r2Scores);
   // Get the canvas element
   var ctx = document.getElementById("R2Score").getContext("2d");
 
