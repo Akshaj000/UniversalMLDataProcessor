@@ -56,5 +56,7 @@ def fit(
     elif type == TypeEnum.CLASSIFICATION.value:
         models = MacineLearningClassification(data_pre_object)
     return models.evaluvate()
+    
+
 
     

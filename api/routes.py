@@ -63,3 +63,23 @@ def process():
             "success": False, 
             "errors" : str(e)
         }), 400
+
+@app.route('/file', methods = ['GET'])
+def get_file():
+    import pandas as pd
+    try:
+        data_pre_object = pd.read_csv("uploads/data.csv")
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "errors": str(e)
+        }), 400
+    info_dict = data_pre_object.describe(include='all').to_dict()
+    null_values = data_pre_object.isnull().sum().to_dict()
+    data_types = data_pre_object.dtypes.astype(str).to_dict()
+    return jsonify({
+        "success": True,
+        "info": info_dict,
+        "null_values": null_values,
+        "data_types": data_types
+    }), 200
