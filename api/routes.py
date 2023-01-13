@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 from api import app
 import json
 
@@ -12,9 +12,9 @@ def health():
         file = open("uploads/data.csv", "rb")
     except FileNotFoundError:
         d["errors"] = "File not found. Please upload the file."
-        return d
+        return jsonify(d)
     d["isHealthy"] = True
-    return d
+    return jsonify(d)
 
 @app.route('/upload', methods = ['POST'])  
 def upload(): 
@@ -24,15 +24,15 @@ def upload():
             f.save("uploads/data.csv")
             return {"success": True}
         except Exception as e:
-            return {
+            return jsonify({
                 "success": False,
                 "error": str(e)
-            }
+            }), 200
     else:
-        return {
+        return jsonify({
             "success": False,
             "errors": "Can only except post method."
-        }
+        }), 400
 
 @app.route('/process', methods = ['GET', 'POST'])
 def process():
@@ -57,9 +57,9 @@ def process():
             type = data['type']
         )
         print(fit)
-        return fit
+        return jsonify(fit), 200
     except Exception as e:
-        return {
+        return  jsonify({
             "success": False, 
             "errors" : str(e)
-        }
+        }), 400

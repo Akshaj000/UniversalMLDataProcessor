@@ -29,13 +29,22 @@ document.getElementById("start").addEventListener("click", () => {
     can_apply_smote: SmoteChosen == "true" ? true : false,
     scaler: ScalerChosen,
   };
-  process(data);
-  
+  process(data)
 });
 
 const process = async(data)=>{
-  await fetch("http://localhost:5000/process", {
+    await fetch("http://localhost:5000/process", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+
+    },
+    mode : 'cors',
     body: JSON.stringify(data),
   })
+  .then(res => res.json())
+  .then(response => {
+      console.log(JSON.stringify(response))
+  })
+  .catch(error => console.error('Error:', error));
 }

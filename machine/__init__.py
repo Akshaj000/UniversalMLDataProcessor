@@ -30,7 +30,7 @@ def preprocessor(
     if fill_null == "mean":
         data_pre_object.handle_null("mean")
     else:
-        data_pre_object.drop_null()
+        data_pre_object.handle_null("drop")
     data_pre_object.out_in(target)
     data_pre_object.split(split_percent)
     if can_apply_smote:
