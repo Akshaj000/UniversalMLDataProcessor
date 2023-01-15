@@ -13,9 +13,10 @@ class MacineLearningClassification:
             from sklearn.linear_model import LogisticRegression
             from sklearn.tree import DecisionTreeClassifier
             from sklearn.ensemble import RandomForestClassifier
-            from sklearn.naive_bayes import BernoulliNB,GaussianNB
+            from sklearn.naive_bayes import GaussianNB
+            from sklearn.svm import SVC
             from sklearn.neighbors import KNeighborsClassifier
-            models = [LogisticRegression(),DecisionTreeClassifier(),RandomForestClassifier(),BernoulliNB(),GaussianNB(),KNeighborsClassifier()]
+            models = [LogisticRegression(),DecisionTreeClassifier(),RandomForestClassifier(),GaussianNB(),KNeighborsClassifier(),SVC()]
         self.model_evaluvation_dict = {str(i).replace("()",""):{'model_object':i} for i in models}
         self.model_prediction = {str(i).replace("()",""):None for i in models}
     def fit(self):
